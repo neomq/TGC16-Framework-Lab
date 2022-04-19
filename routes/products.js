@@ -69,6 +69,7 @@ router.post('/create', async (req,res)=>{
             if (tags) {
                 await food.tags().attach(tags.split(","));
             }
+            req.flash("success_messages", `New Product ${food.get('name')} has been created`)
             res.redirect('/products');
         },
         // display error message
@@ -153,6 +154,7 @@ router.post('/:product_id/update', async (req,res)=>{
             // add in all the tags selected in the form
             await food.tags().attach(tagIds);
 
+            req.flash("success_messages", `New Product ${food.get('name')} has been updated`)
             res.redirect('/products');
         },
         // display error message
@@ -192,6 +194,7 @@ router.post('/:product_id/delete', async (req,res)=>{
     });
 
     await food.destroy(); // call the destroy function
+    req.flash("success_messages", `Product has been deleted`)
     res.redirect('/products')
 })
 
