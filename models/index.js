@@ -10,6 +10,10 @@ const Product = bookshelf.model('Product', {
     // argument is the name of the model
     category() {
         return this.belongsTo('Category')
+    },
+    // one product can have many tags
+    tags() {
+        return this.belongsToMany('Tag');
     }
 })
 
@@ -21,4 +25,13 @@ const Category = bookshelf.model('Category', {
     }
 })
 
-module.exports = { Product, Category };
+const Tag = bookshelf.model('Tag',{
+    tableName: 'tags',
+    // one tag can belong to many products
+    products() {
+        return this.belongsToMany('Product')
+    }
+})
+
+
+module.exports = { Product, Category, Tag };
