@@ -83,10 +83,8 @@ router.post('/:product_id/update', async (req,res)=>{
     });
 
     const form = createProductForm();
-
     form.handle(req, {
         'success': async (form) => {
-            const food = new Product();
             // food.set('name', form.data.name);
             // food.set('cost', form.data.cost);
             // food.set('description', form.data.description);
