@@ -3,6 +3,7 @@ const forms = require("forms");
 // create some shortcuts
 const fields = forms.fields;
 const validators = forms.validators;
+const widgets = forms.widgets;
 
 // bootstrap helper function to format forms to use CSS classes from bootstrap
 var bootstrapField = function (name, object) {
@@ -26,7 +27,7 @@ var bootstrapField = function (name, object) {
 };
 
 // Define a product form
-const createProductForm = () => {
+const createProductForm = (categories) => {
     return forms.create({
         'name': fields.string({
             required: true,
@@ -50,6 +51,16 @@ const createProductForm = () => {
                 label: ['form-label']
             }
         }),
+        'category_id': fields.string({
+            label: 'Category',
+            required: true,
+            errorAfterField: true,
+            cssClasses: {
+                label: ['form-label']
+            },
+            widget: widgets.select(),
+            choices: categories
+        })
     })
 };
 

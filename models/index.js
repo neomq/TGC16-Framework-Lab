@@ -5,11 +5,20 @@ const bookshelf = require('../bookshelf')
 
 // create a new Product model and store in the Product object
 const Product = bookshelf.model('Product', {
-    tableName: 'products'
+    tableName: 'products',
+    // one product belongs to one category
+    // argument is the name of the model
+    category() {
+        return this.belongsTo('Category')
+    }
 })
 
 const Category = bookshelf.model('Category', {
-    tableName: 'categories'
+    tableName: 'categories',
+    // one category has many products
+    products() {
+        return this.hasMany('Product')
+    }
 })
 
 module.exports = { Product, Category };
