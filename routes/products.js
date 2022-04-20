@@ -5,7 +5,6 @@ const router = express.Router();
 const { Product, Category, Tag } = require('../models')
 // import in forms
 const { bootstrapField, createProductForm } = require('../forms');
-// const { Router } = require("express");
 
 async function getAllCategories () {
     const allCategories = await Category.fetchAll().map((c) => {
@@ -22,7 +21,7 @@ async function getAllTags () {
 
 // Display all products
 router.get('/', async (req,res)=>{
-    // #2 - fetch all the products (ie, SELECT * from products)
+    // fetch all the products (ie, SELECT * from products)
     let foods = await Product.collection().fetch({
         // load the category and tag relationship
         withRelated:['category', 'tags']
